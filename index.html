@@ -32,6 +32,8 @@ box-shadow:inset 0 3px 0 rgba(255,255,255,.35),inset 0 -10px 20px rgba(0,0,0,.25
 .tile{position:relative;display:block;width:100%;aspect-ratio:1;border-radius:27%;overflow:hidden;border:0;padding:0;cursor:pointer;background:#EADFC2;color:#fff;display:grid;place-items:center;
 box-shadow:0 7px 0 rgba(0,0,0,.45),0 14px 18px -4px rgba(0,0,0,.45);transform:translateY(-3px);transition:transform .12s,box-shadow .12s,filter .2s}
 .tile img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.tile img[src*="pramaan"]{object-fit:contain;padding:6%;background:#fff}
+.li .th img[src*="pramaan"]{object-fit:contain;padding:2px;background:#fff}
 .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.4),transparent 45%);pointer-events:none}
 .tile svg{width:44%;height:44%;color:#0B3B2E}
 a.tile:hover,button.tile:hover{transform:translateY(-6px);box-shadow:0 10px 0 rgba(0,0,0,.45),0 20px 24px -4px rgba(0,0,0,.5)}
@@ -243,7 +245,7 @@ a.li:hover{background:rgba(255,255,255,.16);transform:translateX(3px)}
 </form></dialog>
 <div id="toast" aria-live="polite"></div>
 <script>
-const $=s=>document.querySelector(s),LOGOS={courtrix:'assets/courtrix-logo.png',mausam:'assets/mausam-logo.svg',portfolio:'assets/portpholio-logo.svg'},I={
+const $=s=>document.querySelector(s),LOGOS={courtrix:'assets/courtrix-logo.png',mausam:'assets/mausam-logo.svg',portfolio:'assets/portpholio-logo.svg',pramaan:'assets/pramaan.png'},I={
 globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/>',
 cloud:'<path d="M17.500 19H9a7 7 0 1 1 6.700-9h1.800a4.500 4.500 0 0 1 0 9z"/>',
 trophy:'<path d="M6 9H4a2 2 0 0 1-2-2V5h4M18 9h2a2 2 0 0 0 2-2V5h-4M6 4h12v6a6 6 0 0 1-12 0zM12 16v3M8 22h8M10 19h4"/>',
@@ -259,7 +261,8 @@ dice:'<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5"
 const DEFAULTS=[
 {id:'courtrix',name:'Courtrix',description:'Badminton tournament manager: brackets, fixtures and live scores.',live_url:'https://batmintontournament.netlify.app/',github_url:'',category:'Sports',status:'Live',icon:'game',thumb:'',tech:[],featured:false,created:1},
 {id:'mausam',name:'Mausam',description:'A clean weather app with current conditions and forecasts.',live_url:'https://mausam225.netlify.app',github_url:'',category:'Weather',status:'Live',icon:'cloud',thumb:'',tech:[],featured:false,created:2},
-{id:'portfolio',name:'Portpholio',description:'My personal portfolio site: projects, skills and contact.',live_url:'https://portpholio225.netlify.app/',github_url:'',category:'Portfolio',status:'Live',icon:'user',thumb:'',tech:[],featured:true,created:3}];
+{id:'portfolio',name:'Portpholio',description:'My personal portfolio site: projects, skills and contact.',live_url:'https://portpholio225.netlify.app/',github_url:'',category:'Portfolio',status:'Live',icon:'user',thumb:'',tech:[],featured:true,created:3},
+{id:'pramaan',name:'Pramaan',description:'Pramaan project.',live_url:'https://pramaan23.netlify.app/',github_url:'',category:'Project',status:'Live',icon:'globe',thumb:'',tech:[],featured:false,created:4}];
 const ic=(k,x='')=>`<svg viewBox="0 0 24 24" ${x}>${I[k]||I.globe}</svg>`;
 const svg=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICO[k]}</svg>`;
 const SUN='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></svg>',
