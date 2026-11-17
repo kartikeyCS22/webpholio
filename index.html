@@ -210,6 +210,86 @@ a.li:hover{background:rgba(255,255,255,.16);transform:translateX(3px)}
 @media(min-width:700px){.spot{display:block}}.nobg .spot{display:none!important}
 :root[data-skin=ocean]{--em:#0F7FA8;--hu:50deg}:root[data-skin=sunset]{--em:#D2661E;--hu:-140deg}:root[data-skin=violet]{--em:#7A4BC9;--hu:110deg}
 [data-skin] .remote,[data-skin] .pn,[data-skin] #bg{filter:hue-rotate(var(--hu))}
+/* ===== v5: premium emerald layer (additive overrides) ===== */
+:root{--m1:#0E7A58;--m2:#064E3B;--m3:#022C22;--bd:#021F17;--gold:#D6B77A;--mint:#6EE7B7;--ti:1;--am:.5;--glass:rgba(6,40,31,.72)}
+:root[data-finish=graphite]{--m1:#46515F;--m2:#262E38;--m3:#12171D;--bd:#080B0F}
+:root[data-finish=titanium]{--m1:#A7B0BB;--m2:#747E8A;--m3:#4A525C;--bd:#22272D}
+:root[data-finish=obsidian]{--m1:#2C2C31;--m2:#151518;--m3:#060607;--bd:#000}
+:root[data-theme=dark]{--bg:#07110F}
+body{font-family:"DM Sans",Inter,system-ui,sans-serif}
+.amb{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:calc(var(--am)*1.6);background:radial-gradient(900px 560px at 50% 38%,rgba(110,231,183,.2),transparent 70%),radial-gradient(500px 400px at 85% 90%,rgba(214,183,122,.14),transparent 70%);animation:breathe 9s ease-in-out infinite alternate;transition:opacity .5s}
+@keyframes breathe{to{opacity:calc(var(--am)*1.1);transform:scale(1.04)}}
+@keyframes flt{50%{translate:0 -5px}}
+[data-ai="0"] .amb,[data-ai="0"] body,[data-ai="0"] .remote::after{animation:none}
+[data-ai="0"] #bg{opacity:.3}[data-ai="2"] .amb{animation-duration:5s}
+/* metal body */
+.remote{background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),radial-gradient(460px circle at var(--lx,30%) var(--ly,0%),rgba(255,255,255,.2),transparent 62%),linear-gradient(165deg,var(--m1),var(--m2) 42%,var(--m3));border-color:var(--bd);
+box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -14px 26px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.07),0 3px 0 var(--bd),0 8px 0 color-mix(in srgb,var(--bd),#fff 9%),0 40px 70px -24px rgba(0,0,0,.75),0 80px 100px -50px rgba(0,0,0,.5);
+transform:perspective(1100px) rotateX(calc(var(--rx,0deg)*var(--ti))) rotateY(calc(var(--ry,0deg)*var(--ti)));transition:transform .3s cubic-bezier(.2,.8,.2,1);
+animation:rise .8s cubic-bezier(.2,.9,.2,1) backwards,flt 9s 1.2s ease-in-out infinite}
+[data-ai="0"] .remote{animation:rise .8s cubic-bezier(.2,.9,.2,1) backwards}
+@media(max-width:520px){.remote{animation:rise .8s cubic-bezier(.2,.9,.2,1) backwards}}
+.pn{background:linear-gradient(165deg,var(--m1),var(--m3));border-color:var(--bd);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 5px 0 var(--bd),0 26px 40px -16px rgba(0,0,0,.6)}
+.pn.dk{background:linear-gradient(180deg,#06241B,#0A3326)}
+.soc,.srch input{background:color-mix(in srgb,var(--m3),#000 25%)}
+.lcd{translate:calc(var(--px,0)*3px) calc(var(--py,0)*2px);transition:translate .3s}
+.keys{translate:calc(var(--px,0)*5px) calc(var(--py,0)*4px);transition:opacity .5s,filter .5s,translate .3s}
+.tile{box-shadow:0 7px 0 rgba(0,0,0,.5),0 16px 20px -6px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -3px 6px rgba(0,0,0,.12)}
+.rb{border-color:var(--bd);box-shadow:0 4px 0 var(--bd),0 9px 10px -4px rgba(0,0,0,.5),inset 0 2px 0 #fff,inset 0 -3px 5px rgba(0,0,0,.12)}
+.rb:active{box-shadow:0 1px 0 var(--bd),inset 0 2px 5px rgba(0,0,0,.25)}
+.chip{border-color:var(--bd);box-shadow:0 3px 0 var(--bd)}.chip[aria-pressed=true]{background:var(--gold)}
+/* lcd status strip */
+.lcx{margin:-4px 0 12px;padding:9px 14px;border-radius:16px;border:2px solid #041A14;background:linear-gradient(180deg,#06241B,#0A3326);box-shadow:inset 0 4px 10px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.18);font:500 11px/1.5 "DM Mono",ui-monospace,monospace;color:#6DF5B6;letter-spacing:.04em;transition:opacity .5s,filter .5s}
+.lcx.off{opacity:.35;filter:grayscale(1)}
+.lcx>div{display:flex;gap:10px;align-items:center;white-space:nowrap;overflow:hidden}.lcx span{overflow:hidden;text-overflow:ellipsis}
+.l1 b{color:#B8FFDF}.l1 .tm{margin-left:auto}.l2{min-height:17px;animation:lcdIn .3s both}.l2 b{color:#FFD36A;font-weight:500}.mu{opacity:.55}.l3{opacity:.8}
+.sg{display:inline-flex;gap:2px;align-items:flex-end;height:11px}.sg i{width:3px;border-radius:1px;background:#6DF5B6;animation:eq 1.4s ease-in-out infinite}
+.sg i:nth-child(1){height:30%}.sg i:nth-child(2){height:55%;animation-delay:-.3s}.sg i:nth-child(3){height:80%;animation-delay:-.6s}.sg i:nth-child(4){height:100%;animation-delay:-.9s}
+.lcx.off .sg i{animation:none;opacity:.3}
+.dock{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.dock .chip{flex:1;height:36px;padding:0 10px;text-align:center}
+/* views */
+#gv{display:none;position:relative;z-index:2;width:min(1080px,100%);padding:8px 4px 24px;color:#F8FAFC}
+.gridv #gv{display:block}.gridv #remote,.gridv .side,.gridv .floor,.gridv #spot,.gridv .foot{display:none!important}
+.gtop{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-radius:22px;border:1px solid rgba(110,231,183,.2);background:var(--glass);backdrop-filter:blur(14px);margin-bottom:14px}
+.gtop .brand{margin-right:auto;font:800 22px "Bricolage Grotesque";color:#F8FAFC}
+.gtop input{flex:1 1 200px;max-width:320px;height:38px;border-radius:999px;border:1px solid rgba(110,231,183,.3);background:rgba(0,0,0,.28);color:#F8FAFC;padding:0 16px;font:500 14px "DM Sans"}
+.gtop input:focus{outline:0;border-color:var(--mint)}
+#gch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+#gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.gc{position:relative;display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:20px;border:1px solid rgba(110,231,183,.18);background:linear-gradient(160deg,rgba(14,122,88,.35),rgba(2,44,34,.75));box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 26px -14px rgba(0,0,0,.7);color:#F8FAFC;font:inherit;cursor:pointer;transition:transform .25s cubic-bezier(.2,.9,.2,1),box-shadow .25s,border-color .25s;text-align:left}
+.gc:hover{transform:translateY(-5px);border-color:rgba(110,231,183,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 24px 34px -14px rgba(0,0,0,.8)}
+.gc.lit{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 20px 34px -12px rgba(0,0,0,.8)}
+.gadd{align-items:center;justify-content:center;min-height:130px;font:800 18px "Bricolage Grotesque";border-style:dashed}
+.ent .gc{animation:pop .45s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i)*40ms)}
+.gt{display:flex;gap:12px;align-items:center}.gn{min-width:0;margin-right:auto}.gn b{display:block;font:800 16px "Bricolage Grotesque";overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gn em,.gm{font:500 11px "DM Mono",ui-monospace,monospace;font-style:normal;color:#94A3B8;letter-spacing:.05em}.gm{display:flex;gap:10px;flex-wrap:wrap}
+.gst{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#F8FAFC;display:grid;place-items:center;cursor:pointer}.gst[aria-pressed=true]{color:var(--gold)}.gst[aria-pressed=true] svg{fill:currentColor}
+.gcb{display:block;text-align:center;padding:9px;border-radius:12px;font:700 13px "DM Sans";background:linear-gradient(180deg,#F0D9A4,var(--gold));color:#22180A;text-decoration:none;box-shadow:0 3px 0 #7A6234;transition:transform .1s,box-shadow .1s}
+.gcb:active{transform:translateY(2px);box-shadow:0 1px 0 #7A6234}.gcb.off{background:rgba(255,255,255,.1);color:#94A3B8;box-shadow:none}
+.ti{flex:none;width:44px;height:44px;border-radius:14px;overflow:hidden;background:#EADFC2;display:grid;place-items:center;box-shadow:0 3px 0 rgba(0,0,0,.4)}
+.ti img{width:100%;height:100%;object-fit:cover}.ti svg{width:55%;height:55%;color:#0B3B2E}.ti img[src*=pramaan],.ti img[src*=parikshalogo]{object-fit:contain;padding:3px;background:#fff}
+/* preview popover */
+.pv{position:fixed;z-index:50;padding:14px;border-radius:18px;border:1px solid rgba(110,231,183,.25);background:rgba(5,30,23,.94);backdrop-filter:blur(14px);color:#F8FAFC;box-shadow:0 24px 50px -16px rgba(0,0,0,.8);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility 0s .18s}
+.pv.on{opacity:1;visibility:visible;transform:none;transition:opacity .18s,transform .18s}
+.pvh{display:flex;gap:12px;align-items:center}.pvh>div{min-width:0;margin-right:auto}.pvh b{display:block;font:800 16px "Bricolage Grotesque"}.pvh em{font:500 11px "DM Mono",monospace;font-style:normal;color:#94A3B8;display:block;overflow:hidden;text-overflow:ellipsis}.pvs{color:var(--gold)}
+.pv p{margin:10px 0 0;font-size:13px;line-height:1.45;color:#CBD5E1}.pvm{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.pvm span{font:500 10px "DM Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(110,231,183,.12);color:var(--mint)}
+.pvl{display:block;margin-top:12px;text-align:center;padding:9px;border-radius:12px;font:700 13px "DM Sans";background:linear-gradient(180deg,#F0D9A4,var(--gold));color:#22180A;text-decoration:none;box-shadow:0 3px 0 #7A6234}
+.lz{position:fixed;z-index:55;width:40px;height:40px;margin:-20px;border-radius:50%;border:2px solid var(--mint);pointer-events:none;animation:lz .75s ease-out forwards}@keyframes lz{to{transform:scale(14);opacity:0}}
+/* overlay panels */
+#ov{position:fixed;inset:0;z-index:60;display:flex;justify-content:center;align-items:flex-start;padding:12vh 12px 12px;background:rgba(2,12,9,.55);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s .2s}
+#ov:not(.on){pointer-events:none}#ov.on{opacity:1;visibility:visible;transition:opacity .2s}
+.pnl{display:none;width:min(560px,100%);max-height:76dvh;overflow:auto;border-radius:22px;border:1px solid rgba(110,231,183,.22);background:linear-gradient(180deg,rgba(8,40,31,.96),rgba(4,22,17,.97));color:#F8FAFC;box-shadow:0 40px 80px -20px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.08)}
+.pnl.on{display:block;animation:pnl .24s cubic-bezier(.2,.9,.2,1)}@keyframes pnl{from{opacity:0;transform:translateY(12px) scale(.97)}}
+.pnl h3{font:800 15px "Bricolage Grotesque";margin:16px 0 10px;color:var(--gold)}.pnl .in2{padding:0 18px 18px}
+.pnl header{display:flex;align-items:center;padding:16px 18px 0}.pnl header h2{font-size:22px;margin-right:auto}.pnl .x{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:transparent;color:#F8FAFC;font-size:18px;cursor:pointer}
+#cpq{width:100%;border:0;border-bottom:1px solid rgba(110,231,183,.2);background:transparent;color:#F8FAFC;padding:18px 20px;font:500 17px "DM Sans";outline:0}
+#cpl{list-style:none;padding:8px;margin:0;max-height:52dvh;overflow:auto}
+#cpl li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;cursor:pointer}#cpl li[aria-selected=true]{background:rgba(110,231,183,.14)}
+#cpl li small{margin-left:auto;font:500 11px "DM Mono",monospace;color:#94A3B8}#cpl .none{color:#94A3B8;cursor:default}
+.pnl .stats div{background:rgba(255,255,255,.06)}.st4{grid-template-columns:repeat(4,1fr)!important}.st4 b{font-size:22px!important}.pnl .dim{margin:10px 0;color:#94A3B8}.pnl .li{margin:0}
+.hr{display:flex;align-items:center}.hr .li{flex:1;min-width:0}.hr small{color:var(--gold);font:500 10px "DM Mono",monospace;text-transform:uppercase}
+.pnl .row2{margin-bottom:4px}.pnl label{display:flex;align-items:center;gap:12px;font-weight:500;margin:8px 0}.pnl label span{width:96px;font-size:13px;color:#94A3B8}.pnl input[type=range]{flex:1;accent-color:var(--mint)}
+@media(max-width:520px){#ov{align-items:flex-end;padding:0}.pnl{border-radius:22px 22px 0 0;max-height:88dvh}#cpl{max-height:60dvh}.dock .chip{font-size:10px;padding:0 6px}.st4{grid-template-columns:repeat(2,1fr)!important}}
 </style>
 <main class="remote" id="remote" aria-label="Webpholio remote">
  <div class="top"><button class="led" id="led" aria-label="Power" aria-pressed="true"></button><span class="brand">Webpholio</span>
@@ -217,6 +297,8 @@ a.li:hover{background:rgba(255,255,255,.16);transform:translateX(3px)}
   <button class="rb" id="snd" aria-label="Sound effects" aria-pressed="false"></button>
   <button class="rb" id="theme" aria-label="Toggle theme"></button></div>
  <div class="lcd" id="lcd" aria-live="off"></div>
+ <div class="lcx" id="lcx" aria-hidden="true"><div class="l1"></div><div class="l2"></div><div class="l3"></div></div>
+ <div class="dock"><button class="chip" id="vw" aria-pressed="false">Grid</button><button class="chip" id="hb">Activity</button><button class="chip" id="sd">Studio</button><button class="chip" id="ck" aria-label="Command palette (Ctrl+K)">⌘K</button></div>
  <div class="bar" id="bar">
   <label class="srch"><span class="sr">Search projects</span><span id="qi"></span><input id="q" type="search" placeholder="Search channels" autocomplete="off" enterkeyhint="search"><kbd>/</kbd></label>
   <button class="rb" id="dice" aria-label="Shuffle: land on a random channel"></button>
@@ -231,6 +313,20 @@ a.li:hover{background:rgba(255,255,255,.16);transform:translateX(3px)}
 <div class="spot" id="spot" aria-hidden="true"></div><canvas id="bg" aria-hidden="true"></canvas><div class="floor" aria-hidden="true"></div>
 <aside class="side l" id="sl" aria-label="Today and your tally"></aside>
 <aside class="side r" id="sr2" aria-label="Recent projects and shortcuts"></aside>
+<div class="amb" aria-hidden="true"></div>
+<section id="gv" aria-label="Grid view">
+ <div class="gtop"><span class="brand">Webpholio</span><input id="gq" type="search" placeholder="Search projects" autocomplete="off" aria-label="Search projects">
+  <button class="chip" id="gedit" hidden aria-pressed="false">Edit</button><button class="chip" id="gback">← Remote</button></div>
+ <div id="gch" role="group" aria-label="Filter by category"></div>
+ <div id="gg"></div>
+</section>
+<div class="pv" id="pv" aria-hidden="true"></div>
+<div id="ov">
+ <section class="pnl" id="p-cp" role="dialog" aria-label="Command palette"><input id="cpq" placeholder="Search projects or run a command…" autocomplete="off" aria-label="Command palette"><ul id="cpl" role="listbox"></ul></section>
+ <section class="pnl" id="p-hub" role="dialog" aria-label="Activity"><header><h2>Activity</h2><button class="x" data-x aria-label="Close">×</button></header><div class="in2" id="hub"></div></section>
+ <section class="pnl" id="p-std" role="dialog" aria-label="Customization studio"><header><h2>Customization Studio</h2><button class="x" data-x aria-label="Close">×</button></header><div class="in2" id="std"></div></section>
+</div>
+
 
 <dialog id="dlg"><form id="f" novalidate>
  <h2 id="ft">Add Project</h2>
@@ -514,7 +610,7 @@ function side(){if(!matchMedia('(min-width:1100px)').matches)return;
  <section class="pn"><h3>Today's tally</h3><div class="stats"><div><b>${P.length}</b>channels</div><div><b>${nOpens()}</b>opens today</div><div><b>${favs.size}</b>starred</div></div></section>
  <section class="pn"><h3>Starred</h3>${st.length?st.map(li).join(''):'<p class="dim">Hover a logo and press the star to pin it here.</p>'}</section>`;
  sr2.innerHTML=`<section class="pn"><h3>Recently opened</h3>${rc.length?rc.map(li).join(''):'<p class="dim">Open a project and it shows up here.</p>'}</section>
- <section class="pn"><h3>Shortcuts</h3><div class="ks"><kbd>/</kbd>Search<kbd>R</kbd>Shuffle<kbd>F</kbd>Star focused logo<kbd>0-9</kbd>Jump to channel<kbd>T</kbd>Theme<kbd>B</kbd>Background motion<kbd>C</kbd>Colour skin<kbd>P</kbd>Power</div></section>
+ <section class="pn"><h3>Shortcuts</h3><div class="ks"><kbd>/</kbd>Search<kbd>R</kbd>Shuffle<kbd>F</kbd>Star focused logo<kbd>0-9</kbd>Jump to channel<kbd>T</kbd>Theme<kbd>B</kbd>Background motion<kbd>C</kbd>Colour skin<kbd>P</kbd>Power<kbd>Ctrl K</kbd>Command palette</div></section>
  <section class="pn"><h3>Controls</h3><div class="row2"><button class="chip" id="shf">Shuffle</button><button class="chip" id="skn">Skin: ${SK[skin]}</button><button class="chip" id="bgt" aria-pressed="${bgOn}">Motion</button></div></section>`;tick()}
 [sl,sr2].forEach(a=>{a.addEventListener('click',e=>{const l=e.target.closest('[data-p]');
   if(l){const p=P.find(x=>x.id===l.dataset.p);if(p){bump(p);beep([660,990],.07,'square',.035)}return}
@@ -555,6 +651,153 @@ addEventListener('pointermove',e=>{const sp=$('#spot');sp.style.setProperty('--m
 document.addEventListener('keydown',e=>{if(e.metaKey||e.ctrlKey||e.altKey||dlg.open||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;if(e.key.toLowerCase()==='c'&&!standby)wpSkin()});
 applySkin();
 runBg();side();
+
+/* ===== v5: premium layer. Additive: wraps existing functions, reuses ls/cnt/rec/favs/bump/toggleFav/shuffle/wpSkin/wpBg.
+   Only new localStorage keys: wp-view (remote|grid) and wp-studio (finish, animation, tilt, ambient). ===== */
+const ST=Object.assign({fin:'emerald',ai:1,ti:1,am:.5},ls.get('wp-studio',{}));
+const saveST=()=>ls.set('wp-studio',ST);
+function applyST(){R.dataset.finish=ST.fin;R.dataset.ai=ST.ai;R.style.setProperty('--ti',ST.ti);R.style.setProperty('--am',ST.am)}applyST();
+const setTheme=t=>{R.dataset.theme=t;try{localStorage.setItem('wp-theme',t)}catch(e){}paint()};
+const setSkin=i=>{skin=i;ls.set('wp-skin',SK[skin]);applySkin();side()};
+{const w=wpSkin;wpSkin=function(){w();if(skin&&ST.fin!=='emerald'){ST.fin='emerald';saveST();applyST()}}}
+
+/* launch helpers (same effects as the remote's own click path; open() is the add/edit dialog, so tabs open via an anchor) */
+function ring(el){if(RM)return;const r=(el||remote).getBoundingClientRect(),d=document.createElement('i');d.className='lz';d.style.left=r.left+r.width/2+'px';d.style.top=r.top+r.height/2+'px';document.body.append(d);setTimeout(()=>d.remove(),800)}
+function launchFx(p,el){bump(p);navigator.vibrate?.(15);beep([660,990,1320],.07,'square',.035);
+ if(!standby&&!booting&&!busy){led.classList.add('go');showing=true;lcd(`<b>OPENING ${esc(String(p.name).toUpperCase())} ↗</b><small>NEW TAB · OPEN #${cnt[p.id]}</small>`);
+  setTimeout(()=>{led.classList.remove('go');if(showing&&!busy)idle()},1400)}
+ srEl.textContent='Opening '+p.name;pulse=performance.now();ring(el)}
+function openUrl(u){const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener noreferrer';document.body.append(a);a.click();a.remove()}
+function launchP(p){if(!okUrl(p.live_url)){toast(p.name+': no link set');return}launchFx(p);openUrl(p.live_url)}
+document.addEventListener('click',e=>{const t=e.target.closest('a.tile');if(t)ring(t)});
+
+/* light + parallax follow the cursor (CSS vars only, rAF-throttled) */
+if(HOVER&&!RM&&matchMedia('(min-width:521px)').matches){let f=0,ev;
+ remote.addEventListener('pointermove',e=>{ev=e;if(f)return;f=requestAnimationFrame(()=>{f=0;const r=remote.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width,y=(ev.clientY-r.top)/r.height;
+  remote.style.setProperty('--lx',(x*100).toFixed(1)+'%');remote.style.setProperty('--ly',(y*100).toFixed(1)+'%');remote.style.setProperty('--px',(x-.5).toFixed(2));remote.style.setProperty('--py',(y-.5).toFixed(2))})});
+ remote.addEventListener('pointerleave',()=>['--px','--py'].forEach(k=>remote.style.setProperty(k,0)))}
+
+/* LCD status strip */
+const lx1=$('#lcx .l1'),lx2=$('#lcx .l2'),lx3=$('#lcx .l3'),put=(el,h)=>{if(el._h!==h){el._h=h;el.innerHTML=h}};
+function lcxr(){const n=new Date(),p=P.find(x=>x.id===curId),L=list(),ix=p?L.findIndex(x=>x.id===p.id):-1,last=P.find(x=>x.id===rec[0]),
+ st=standby?'STANDBY':booting?'BOOTING':busy?'SCANNING':failed?'NO SIGNAL':'ONLINE',U=s=>esc(String(s).toUpperCase());
+ put(lx1,`<span class="sg"><i></i><i></i><i></i><i></i></span><b>${st}</b><span class="tm">${esc(n.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}))}</span><span>${U(n.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'}))}</span>`);
+ put(lx2,p?`<b>${U(p.name)}</b><span>${U(p.category||'')}${ix>=0?` · CH ${String(ix+1).padStart(2,'0')}/${String(L.length).padStart(2,'0')}`:''}</span>`:'<span class="mu">NO PROJECT SELECTED</span>');
+ put(lx3,`<span>${P.length} PROJECTS</span><span>★ ${favs.size}</span>${last?`<span>LAST: ${U(last.name)}</span>`:''}`);
+ $('#lcx').classList.toggle('off',standby)}
+setInterval(lcxr,1000);
+led.addEventListener('click',()=>setTimeout(lcxr,0));
+
+/* project preview popover (hover / keyboard focus on the remote; hides fields that have no data) */
+const pv=$('#pv');let pvT=0,pvId=null;
+function pvHide(){clearTimeout(pvT);pv.classList.remove('on');pvId=null}
+function pvShow(t){const p=P.find(x=>x.id===t.dataset.i);if(!p||standby||editMode||ovOn)return;
+ clearTimeout(pvT);pvId=p.id;const c=cnt[p.id]||0,ix=rec.indexOf(p.id),u=okUrl(p.live_url)?new URL(p.live_url).host:'';
+ const meta=[p.category&&`<span>${esc(p.category)}</span>`,p.status&&`<span>${esc(p.status)}</span>`,ix===0?'<span>Last opened</span>':ix>0?'<span>Recently opened</span>':'',c?`<span>${c}× today</span>`:''].filter(Boolean).join('');
+ pv.innerHTML=`<div class="pvh"><span class="ti">${thumb(p)}</span><div><b>${esc(p.name)}</b>${u?`<em>${esc(u)}</em>`:''}</div>${favs.has(p.id)?'<span class="pvs" title="Favourite">★</span>':''}</div>${p.description?`<p>${esc(p.description)}</p>`:''}${meta?`<div class="pvm">${meta}</div>`:''}${u?`<a class="pvl" href="${esc(p.live_url)}" target="_blank" rel="noopener noreferrer">Launch Project ↗</a>`:''}`;
+ const r=t.getBoundingClientRect(),w=Math.min(290,innerWidth-16);pv.style.width=w+'px';pv.style.left=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2))+'px';
+ if(innerHeight-r.bottom>250||r.top<250){pv.style.bottom='auto';pv.style.top=(r.bottom+12)+'px'}else{pv.style.top='auto';pv.style.bottom=(innerHeight-r.top+12)+'px'}
+ pv.classList.add('on')}
+if(HOVER){keys.addEventListener('pointerover',e=>{const t=e.target.closest('[data-i]');if(t&&e.pointerType!=='touch')pvShow(t)});
+ keys.addEventListener('pointerleave',()=>{pvT=setTimeout(pvHide,350)});
+ pv.addEventListener('pointerenter',()=>clearTimeout(pvT));pv.addEventListener('pointerleave',()=>{pvT=setTimeout(pvHide,200)});
+ keys.addEventListener('focusin',e=>{const t=e.target.closest('[data-i]');if(t)pvShow(t)});
+ keys.addEventListener('focusout',e=>{if(!keys.contains(e.relatedTarget))pvT=setTimeout(pvHide,200)})}
+pv.addEventListener('click',e=>{const a=e.target.closest('.pvl'),p=a&&P.find(x=>x.id===pvId);if(p){launchFx(p,a);pvHide()}});
+
+/* grid view (same list(), filters, favourites, launch + edit as the remote) */
+const gv=$('#gv'),gq=$('#gq'),gg=$('#gg');let gridMode=false;
+function grid(){if(!gridMode)return;
+ $('#gch').innerHTML=chipsEl.hidden?'':chipsEl.innerHTML;if(document.activeElement!==gq)gq.value=qEl.value;
+ const ge=$('#gedit');ge.hidden=$('#edit').hidden;ge.setAttribute('aria-pressed',editMode);ge.classList.toggle('on',editMode);
+ if(!ready){gg.innerHTML='<div class="msg">Loading…</div>';return}
+ gg.innerHTML=(list().map((p,i)=>{const ok=okUrl(p.live_url),fv=favs.has(p.id),dev=/dev/i.test(p.status||''),id=esc(p.id),nm=esc(p.name);
+  return `<article class="gc${fv?' fv':''}" data-g="${id}" style="--i:${i}"><div class="gt"><span class="ti">${thumb(p)}</span><div class="gn"><b>${nm}</b><em>${esc(p.category)}</em></div>${editMode?'':`<button class="gst" data-gf="${id}" aria-pressed="${fv}" aria-label="${fv?'Unstar':'Star'} ${nm}">${svg('star')}</button>`}</div><div class="gm"><span>CH ${String(i+1).padStart(2,'0')}</span><span>${dev?'IN DEV':'LIVE'}</span>${cnt[p.id]?`<span>${cnt[p.id]}× today</span>`:''}</div>${editMode?'<span class="gcb">Edit</span>':ok?`<a class="gcb" href="${esc(p.live_url)}" target="_blank" rel="noopener noreferrer" aria-label="Launch ${nm}">Launch ↗</a>`:'<span class="gcb off">No link</span>'}</article>`}).join('')
+  +(editMode?'<button class="gc gadd" id="gadd">+ Add project</button>':''))||`<div class="msg">${P.length?'No projects match.<br><button class="chip" id="gclr">Clear filters</button>':'No projects yet.'}</div>`}
+function setView(g){gridMode=!!g;ls.set('wp-view',gridMode?'grid':'remote');document.body.classList.toggle('gridv',gridMode);
+ $('#vw').textContent=gridMode?'Remote':'Grid';$('#vw').setAttribute('aria-pressed',gridMode);pvHide();
+ gv.classList.add('ent');setTimeout(()=>gv.classList.remove('ent'),900);grid();
+ if(!RM)(gridMode?gv:remote).animate?.([{opacity:0,scale:.96},{opacity:1,scale:1}],{duration:380,easing:'cubic-bezier(.2,.9,.2,1)'});
+ if(ready)beep(gridMode?[660,880]:[880,660],.05,'triangle',.04)}
+gq.addEventListener('input',()=>{qEl.value=gq.value;q=gq.value.trim().toLowerCase();anim=1;view()});
+gv.addEventListener('click',e=>{
+ if(e.target.closest('#gback')){setView(false);return}
+ if(e.target.closest('#gedit')){$('#edit').click();return}
+ const ch=e.target.closest('[data-c]');if(ch){cat=ch.dataset.c;anim=1;beep(900,.03);view();return}
+ const f=e.target.closest('[data-gf]');if(f){toggleFav(f.dataset.gf);return}
+ if(e.target.closest('#gclr')){cat='ALL';q='';qEl.value='';gq.value='';anim=1;view();return}
+ if(e.target.closest('#gadd')){open();return}
+ const c=e.target.closest('.gc[data-g]'),p=c&&P.find(x=>x.id===c.dataset.g);if(!p)return;
+ if(editMode){open(p);return}
+ const a=e.target.closest('a.gcb');if(a){launchFx(p,a);return}
+ if(e.target.closest('a,button'))return;
+ if(okUrl(p.live_url)){launchFx(p,c);openUrl(p.live_url)}else{toast(p.name+': no link set');beep(150,.15,'sawtooth',.04)}});
+function gridShuffle(){const cs=[...gg.querySelectorAll('.gc[data-g]')];if(!cs.length){toast('No projects to shuffle');return}
+ cs.forEach(c=>c.classList.remove('lit'));const c=cs[Math.floor(Math.random()*cs.length)];c.classList.add('lit');c.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'});
+ beep([523,659,784,1047],.09,'triangle',.05);navigator.vibrate?.([20,40,20]);toast('Landed on '+P.find(p=>p.id===c.dataset.g).name);setTimeout(()=>c.classList.remove('lit'),4000)}
+{const s=shuffle;shuffle=function(){return gridMode?gridShuffle():s.apply(this,arguments)}}
+
+/* overlay panels: command palette, activity (recent + insights), studio */
+const ov=$('#ov'),cpq=$('#cpq'),cpl=$('#cpl');let ovOn=false,cur='',prev=null,cpSel=0,cpItems=[];
+const setCat=c=>{cat=c;anim=1;view()};
+const cmds=()=>[
+ {t:'Switch theme',s:'T',run:()=>$('#theme').click()},{t:'Next colour skin',s:'C',run:wpSkin},{t:'Toggle sound',s:'M',run:()=>sndB.click()},
+ {t:'Show favourites',s:'★',run:()=>favs.size?setCat('★'):toast('No favourites yet')},{t:'Show all projects',run:()=>setCat('ALL')},
+ {t:'Recent projects',k:'activity insights usage',run:()=>show('hub')},{t:'Shuffle projects',s:'R',run:()=>shuffle()},
+ {t:'Settings: Customization Studio',k:'settings customize appearance',run:()=>show('std')},{t:gridMode?'Switch to Remote view':'Switch to Grid view',k:'view layout',run:()=>setView(!gridMode)},
+ {t:'Toggle background motion',s:'B',run:wpBg}].map(c=>({...c,k:(c.t+' '+(c.k||'')).toLowerCase()}))
+ .concat(P.filter(p=>okUrl(p.live_url)).map(p=>({t:'Open '+p.name,s:p.category||'',k:('open project '+hay(p)).toLowerCase(),run:()=>launchP(p)})));
+function cpr(){const w=cpq.value.trim().toLowerCase().split(/\s+/).filter(Boolean);cpItems=cmds().filter(c=>w.every(x=>c.k.includes(x)));cpSel=Math.min(cpSel,Math.max(0,cpItems.length-1));
+ cpl.innerHTML=cpItems.length?cpItems.map((c,i)=>`<li role="option" data-ix="${i}" aria-selected="${i===cpSel}">${esc(c.t)}<small>${esc(c.s||'')}</small></li>`).join(''):'<li class="none">No matches</li>'}
+const cpMove=d=>{if(!cpItems.length)return;cpSel=(cpSel+d+cpItems.length)%cpItems.length;cpr();cpl.querySelector('[aria-selected=true]')?.scrollIntoView({block:'nearest'})};
+function cpRun(i=cpSel){const c=cpItems[i];if(!c)return;closeL();beep(880,.04);c.run()}
+cpq.addEventListener('input',()=>{cpSel=0;cpr()});
+cpl.addEventListener('click',e=>{const li=e.target.closest('[data-ix]');if(li)cpRun(+li.dataset.ix)});
+cpl.addEventListener('pointermove',e=>{const li=e.target.closest('[data-ix]');if(li&&+li.dataset.ix!==cpSel){cpSel=+li.dataset.ix;cpl.querySelectorAll('li').forEach((l,i)=>l.setAttribute('aria-selected',i===cpSel))}});
+function show(n){if(dlg.open)return;prev=document.activeElement;cur=n;ovOn=true;pvHide();ov.classList.add('on');ov.querySelectorAll('.pnl').forEach(p=>p.classList.toggle('on',p.id==='p-'+n));
+ if(n==='cp'){cpq.value='';cpSel=0;cpr();cpq.focus()}else{n==='hub'?hubr():stdr();$('#p-'+n+' .x').focus()}}
+function closeL(){if(!ovOn)return;ovOn=false;ov.classList.remove('on');if(ov.contains(document.activeElement))document.activeElement.blur();setTimeout(()=>{if(!ovOn)ov.querySelectorAll('.pnl').forEach(p=>p.classList.remove('on'))},230);prev&&prev.focus&&prev.focus({preventScroll:true})}
+ov.addEventListener('click',e=>{if(e.target===ov||e.target.closest('[data-x]'))closeL()});
+/* capture phase so remote shortcuts (R, T, digits…) stay quiet while a panel is open; Ctrl/Cmd+K never touches existing shortcuts */
+document.addEventListener('keydown',e=>{
+ if(dlg.open)return;
+ if((e.ctrlKey||e.metaKey)&&!e.altKey&&e.key.toLowerCase()==='k'){e.preventDefault();e.stopPropagation();ovOn&&cur==='cp'?closeL():show('cp');return}
+ if(!ovOn)return;
+ if(e.key==='Escape'){e.preventDefault();e.stopPropagation();closeL();return}
+ if(cur==='cp'){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();cpMove(e.key==='ArrowDown'?1:-1)}else if(e.key==='Enter'){e.preventDefault();cpRun()}}
+ if(!e.ctrlKey&&!e.metaKey&&!e.altKey)e.stopPropagation()},true);
+$('#vw').onclick=()=>setView(!gridMode);$('#hb').onclick=()=>show('hub');$('#sd').onclick=()=>show('std');$('#ck').onclick=()=>show('cp');
+
+function hubr(){const top=[...P].sort((a,b)=>(cnt[b.id]||0)-(cnt[a.id]||0))[0],rc=rec.map(id=>P.find(p=>p.id===id)).filter(Boolean),cell=(b,l)=>`<div><b>${b}</b>${l}</div>`;
+ $('#hub').innerHTML=`<h3>Usage insights</h3><div class="stats st4">${cell(P.length,'projects')}${cell(nOpens(),'launches today')}${cell(favs.size,'favourites')}${cell(rc.length,'recent')}</div>${top&&cnt[top.id]?`<p class="dim">Most opened today: <b>${esc(top.name)}</b> (${cnt[top.id]}×)</p>`:''}
+ <h3>Recently opened</h3>${rc.length?rc.map((p,i)=>`<div class="hr">${li(p)}${i===0?'<small>Last opened</small>':''}</div>`).join(''):'<p class="dim">Open a project and it shows up here.</p>'}<p class="dim">Counts follow the remote’s daily tally and reset at midnight.</p>`}
+$('#hub').addEventListener('click',e=>{const l=e.target.closest('[data-p]'),p=l&&P.find(x=>x.id===l.dataset.p);if(p){bump(p);beep([660,990],.07,'square',.035);pulse=performance.now();ring(l)}});
+
+const FIN={emerald:'Emerald',graphite:'Graphite',titanium:'Titanium',obsidian:'Obsidian'},
+PRE={'Emerald Signature':{fin:'emerald',theme:'dark',ai:1,ti:1,am:.5},'Midnight Graphite':{fin:'graphite',theme:'dark',ai:1,ti:1,am:.4},'Titanium Silver':{fin:'titanium',theme:'light',ai:1,ti:.75,am:.35},'Obsidian Black':{fin:'obsidian',theme:'dark',ai:0,ti:.75,am:.2}};
+function stdr(){const c=(a,v,l,on)=>`<button class="chip" data-a="${a}" data-v="${v}" aria-pressed="${!!on}">${l}</button>`,dk=R.dataset.theme==='dark';
+ $('#std').innerHTML=`<h3>Presets</h3><div class="row2">${Object.keys(PRE).map(n=>c('pre',n,n,0)).join('')}</div>
+ <h3>Remote appearance</h3><div class="row2">${Object.keys(FIN).map(k=>c('fin',k,FIN[k],ST.fin===k&&!skin)).join('')}</div>
+ <h3>Colour skin</h3><div class="row2">${SK.map((s,i)=>c('skin',i,s[0].toUpperCase()+s.slice(1),skin===i&&ST.fin==='emerald')).join('')}</div>
+ <h3>Environment</h3><div class="row2">${c('theme','light','Light',!dk)}${c('theme','dark','Dark',dk)}${c('bg','',bgOn?'Motion on':'Motion off',bgOn)}${c('snd','',snd?'Sound on':'Sound off',snd)}</div>
+ <h3>Animation intensity</h3><div class="row2">${[['0','Calm'],['1','Normal'],['2','Lively']].map(([v,l])=>c('ai',v,l,+ST.ai===+v)).join('')}</div>
+ <h3>Feel</h3><label><span>3D tilt</span><input type="range" min="0" max="2" step=".25" value="${ST.ti}" data-r="ti" aria-label="3D tilt intensity"></label>
+ <label><span>Ambient light</span><input type="range" min="0" max="1" step=".05" value="${ST.am}" data-r="am" aria-label="Ambient lighting"></label>`}
+$('#std').addEventListener('input',e=>{const r=e.target.dataset.r;if(!r)return;ST[r]=+e.target.value;saveST();applyST()});
+$('#std').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v;
+ if(a==='pre'){const p=PRE[v];ST.fin=p.fin;ST.ai=p.ai;ST.ti=p.ti;ST.am=p.am;setSkin(0);setTheme(p.theme);toast(v)}
+ else if(a==='fin'){ST.fin=v;if(skin)setSkin(0)}
+ else if(a==='skin'){ST.fin='emerald';setSkin(+v)}
+ else if(a==='theme')setTheme(v);else if(a==='bg')wpBg();else if(a==='snd')sndB.click();
+ else if(a==='ai')ST.ai=+v;
+ saveST();applyST();beep(700,.03);stdr()});
+
+/* wrap existing functions: keep behaviour, add the new surfaces */
+{const i=info,d=idle,v=view;
+ info=function(p){i(p);lcxr()};idle=function(){d();lcxr()};
+ view=function(){v();pvHide();grid();lcxr()}}
+if(ls.get('wp-view','remote')==='grid')setView(true);
+lcxr();
 
 /* ---------- start ---------- */
 (async()=>{
